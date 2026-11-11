@@ -108,7 +108,10 @@ test('normaliserer Tjek-tilbud', () => {
     heading: 'Hakket oksekød',
     pricing: { price: 40, pre_price: 55 },
     quantity: { unit: { symbol: 'g' }, size: { from: 500 }, pieces: { from: 2 } },
-    branding: { name: 'Netto' },
+    branding: { name: 'Netto', logo: 'https://example.test/logo.png' },
+    images: { thumb: 'https://example.test/t.jpg', view: 'https://example.test/v.jpg', zoom: 'https://example.test/z.jpg' },
+    catalog_id: 'abc',
+    catalog_page: 7,
     run_from: '2026-11-09T00:00:00+0100',
     run_till: '2026-11-15T23:59:59+0100',
   });
@@ -116,6 +119,18 @@ test('normaliserer Tjek-tilbud', () => {
   assert.equal(o.amount, 1000);
   assert.equal(o.unit, 'g');
   assert.equal(o.price, 40);
+  assert.equal(o.imageThumb, 'https://example.test/t.jpg');
+  assert.equal(o.image, 'https://example.test/v.jpg');
+  assert.equal(o.imageZoom, 'https://example.test/z.jpg');
+  assert.equal(o.catalogPage, 7);
+  assert.equal(o.storeLogo, 'https://example.test/logo.png');
+});
+
+test('Tjek-tilbud uden billeder giver null i stedet for fejl', () => {
+  const o = normalizeTjekOffer({ id: 'x2', heading: 'Æg', pricing: { price: 20 } });
+  assert.equal(o.image, null);
+  assert.equal(o.imageThumb, null);
+  assert.equal(o.catalogPage, null);
 });
 
 test('validering af opskrifter', () => {

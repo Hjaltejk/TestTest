@@ -90,11 +90,16 @@
         <input id="offer-filter" type="search" placeholder="Søg i tilbud …">
       </div>
       <table class="offers">
-        <thead><tr><th>Vare</th><th>Butik</th><th class="num">Pris</th><th class="num">Før</th><th class="num">Enhedspris</th></tr></thead>
+        <thead><tr><th class="thumb-col"><span class="sr">Udklip</span></th><th>Vare</th><th>Butik</th><th class="num">Pris</th><th class="num">Før</th><th class="num">Enhedspris</th></tr></thead>
         <tbody id="offer-rows"></tbody>
       </table>
     </section>
   </main>
+
+  <dialog id="offer-dialog" class="offer-dialog" aria-labelledby="od-title">
+    <div id="offer-detail"></div>
+    <div class="actions"><button type="button" id="offer-close" class="secondary">Luk</button></div>
+  </dialog>
 
   <template id="ingredient-row">
     <div class="ing-row">

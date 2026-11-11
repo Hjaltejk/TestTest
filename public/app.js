@@ -5,7 +5,7 @@ const fmtDate = (d) => (d ? new Date(d).toLocaleDateString('da-DK', { day: 'nume
 const BASE = { g: 'kg', kg: 'kg', ml: 'l', dl: 'l', cl: 'l', l: 'l', stk: 'stk' };
 
 const STORE_KEY = 'tilbudskokken.excludedStores';
-const state = { recipes: [], ranking: null, offers: null, excludedStores: loadExcluded() };
+const state = { recipes: [], ranking: null, offers: null, offerById: new Map(), excludedStores: loadExcluded() };
 
 function loadExcluded() {
   try {
@@ -87,6 +87,7 @@ function scoreClass(s) {
 }
 
 function renderRanking(list) {
+  for (const r of list) for (const l of r.lines) if (l.offer) state.offerById.set(l.offer.id, l.offer);
   if (!list.length) {
     $('#ranking').innerHTML = '<li class="empty">Du har ingen opskrifter endnu. Opret en under "Mine opskrifter".</li>';
     return;
@@ -102,8 +103,9 @@ function renderRanking(list) {
           if (l.offer) {
             return `<li class="deal">
               <span class="ing">${esc(ing.name)} <small>${esc(amount)}</small></span>
-              <span class="offer"><b>${esc(l.offer.store)}</b>: ${esc(l.offer.title)} – ${kr(l.offer.price)}
-                <small>(${kr(l.offerUnitPrice)}/${BASE[ing.unit]}, ${l.packs} pk.${l.offer.validTo ? `, til ${fmtDate(l.offer.validTo)}` : ''})</small></span>
+              <span class="offer">${thumb(l.offer)}<span><b>${esc(l.offer.store)}</b>: ${esc(l.offer.title)} – ${kr(l.offer.price)}
+                <small>(${kr(l.offerUnitPrice)}/${BASE[ing.unit]}, ${l.packs} pk.${l.offer.validTo ? `, til ${fmtDate(l.offer.validTo)}` : ''})</small>
+                <button type="button" class="link" data-offer="${esc(l.offer.id)}">${l.offer.image ? 'Se udklip fra avisen' : 'Se tilbuddet'}</button></span></span>
               <span class="save">−${kr(l.saving)}</span></li>`;
           }
           return `<li><span class="ing">${esc(ing.name)} <small>${esc(amount)}</small></span>
@@ -145,8 +147,9 @@ function renderRanking(list) {
 /* ---------- Tilbud ---------- */
 async function loadOffers() {
   if (!state.offers) {
-    $('#offer-rows').innerHTML = '<tr><td colspan="5">Henter …</td></tr>';
+    $('#offer-rows').innerHTML = '<tr><td colspan="6">Henter …</td></tr>';
     state.offers = await api('/api/offers');
+    for (const o of state.offers.offers) state.offerById.set(o.id, o);
   }
   renderOffers();
 }
@@ -158,16 +161,78 @@ function renderOffers() {
   $('#offer-rows').innerHTML =
     rows
       .map((o) => {
-        const base = BASE[o.unit];
-        const factor = { g: 0.001, ml: 0.001, dl: 0.1, cl: 0.01 }[o.unit] ?? 1;
-        const unitPrice = o.amount ? o.price / (o.amount * factor) : null;
-        return `<tr><td>${esc(o.title)}<br><small class="muted">${esc(o.description ?? '')}</small></td>
+        return `<tr class="clickable" data-offer="${esc(o.id)}" tabindex="0"><td class="thumb-col">${thumb(o)}</td><td>${esc(o.title)}<br><small class="muted">${esc(o.description ?? '')}</small></td>
           <td>${esc(o.store)}</td><td class="num">${kr(o.price)}</td><td class="num muted">${o.prePrice ? kr(o.prePrice) : ''}</td>
-          <td class="num">${unitPrice && base ? `${kr(Math.round(unitPrice * 100) / 100)}/${base}` : ''}</td></tr>`;
+          <td class="num">${unitPriceText(o)}</td></tr>`;
       })
-      .join('') || '<tr><td colspan="5">Ingen tilbud matcher.</td></tr>';
+      .join('') || '<tr><td colspan="6">Ingen tilbud matcher.</td></tr>';
 }
 $('#offer-filter').addEventListener('input', () => state.offers && renderOffers());
+
+/* ---------- Udklip fra avisen ---------- */
+// Billeder fra Tjek hentes direkte fra deres server; referrer sendes ikke med.
+function thumb(o) {
+  if (!o.imageThumb) return '';
+  return `<img class="thumb" src="${esc(o.imageThumb)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`;
+}
+
+function unitPriceText(o) {
+  const factor = { g: 0.001, ml: 0.001, dl: 0.1, cl: 0.01 }[o.unit] ?? 1;
+  const base = BASE[o.unit];
+  if (!o.amount || !base) return '';
+  return `${kr(Math.round((o.price / (o.amount * factor)) * 100) / 100)}/${base}`;
+}
+
+function openOffer(id) {
+  const o = state.offerById.get(id);
+  if (!o) return;
+  const isSample = o.source === 'sample';
+  const saving = o.prePrice && o.prePrice > o.price ? o.prePrice - o.price : null;
+  const period = [o.validFrom && fmtDate(o.validFrom), o.validTo && fmtDate(o.validTo)].filter(Boolean).join(' – ');
+  const big = o.imageZoom ?? o.image;
+  $('#offer-detail').innerHTML = `
+    <div class="od-head">
+      ${o.storeLogo ? `<img class="od-logo" src="${esc(o.storeLogo)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}
+      <div><b>${esc(o.store)}</b>${period ? `<br><small class="muted">Gyldig ${esc(period)}</small>` : ''}</div>
+    </div>
+    <div class="od-clip">
+      ${
+        o.image
+          ? `<a href="${esc(big)}" target="_blank" rel="noopener noreferrer" title="Åbn i fuld størrelse">
+               <img src="${esc(o.image)}" alt="Udklip fra ${esc(o.store)}s tilbudsavis: ${esc(o.title)}" referrerpolicy="no-referrer"
+                 onerror="this.closest('.od-clip').innerHTML='<p class=muted>Udklippet kunne ikke indlæses.</p>'"></a>`
+          : `<p class="muted">${isSample ? 'Demo-tilbud – der findes intet udklip fra en rigtig avis.' : 'Der er intet udklip til dette tilbud.'}</p>`
+      }
+    </div>
+    <h2 id="od-title">${esc(o.title)}</h2>
+    ${o.description ? `<p class="od-desc">${esc(o.description)}</p>` : ''}
+    <p class="od-price"><b>${kr(o.price)}</b>
+      ${o.prePrice ? `<s class="muted">${kr(o.prePrice)}</s>` : ''}
+      ${saving ? `<span class="od-save">Spar ${kr(Math.round(saving * 100) / 100)}</span>` : ''}
+      ${unitPriceText(o) ? `<small class="muted">· ${unitPriceText(o)}</small>` : ''}</p>
+    <p class="od-source small muted">Kilde: ${
+      isSample
+        ? 'demo-data i appen (ikke en rigtig avis)'
+        : `${esc(o.store)}s tilbudsavis via Tjek/eTilbudsavis${o.catalogPage ? ` · side ${esc(o.catalogPage)}` : ''}`
+    }</p>`;
+  $('#offer-dialog').showModal();
+}
+
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-offer]');
+  if (el) openOffer(el.dataset.offer);
+});
+document.addEventListener('keydown', (e) => {
+  const el = e.target.closest?.('tr[data-offer]');
+  if (el && (e.key === 'Enter' || e.key === ' ')) {
+    e.preventDefault();
+    openOffer(el.dataset.offer);
+  }
+});
+$('#offer-close').addEventListener('click', () => $('#offer-dialog').close());
+$('#offer-dialog').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) e.currentTarget.close(); // klik udenfor lukker
+});
 
 /* ---------- Opskrifter ---------- */
 async function loadRecipes() {

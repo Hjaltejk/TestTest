@@ -33,7 +33,15 @@ export function normalizeTjekOffer(raw) {
     unit: unitOut,
     validFrom: raw.run_from ?? null,
     validTo: raw.run_till ?? null,
-    image: raw.images?.thumb ?? null,
+    // Udklippet fra avissiden i tre størrelser (lille, mellem, stor).
+    imageThumb: raw.images?.thumb ?? raw.images?.view ?? null,
+    image: raw.images?.view ?? raw.images?.zoom ?? raw.images?.thumb ?? null,
+    imageZoom: raw.images?.zoom ?? raw.images?.view ?? null,
+    // Hvor i avisen tilbuddet står.
+    catalogId: raw.catalog_id ?? null,
+    catalogPage: raw.catalog_page ?? null,
+    storeLogo: raw.branding?.logo ?? null,
+    storeColor: raw.branding?.color ?? null,
   };
 }
 

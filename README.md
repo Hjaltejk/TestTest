@@ -30,6 +30,8 @@ Appen starter med 10 proteinrige testopskrifter i `data/recipes.json`.
 
    Du kan også sortere efter pris pr. portion, protein pr. krone eller største besparelse, og fravælge butikker, du ikke handler i.
 
+5. **Kilde.** Klik på "Se udklip fra avisen" ved en ingrediens på tilbud, eller på en række under "Tilbud". Så ser du udklippet fra tilbudsavisen, ligesom på eTilbudsavis, sammen med butik, gyldighedsperiode, førpris og hvilken side i avisen tilbuddet står på. Klik på udklippet for at se det i fuld størrelse.
+
 Hvis appen ikke kan nå Tjek (fx uden internet), bruger den demo-tilbud fra `data/sample-offers.json`. Det står tydeligt øverst på siden.
 
 ## Indstillinger (miljøvariabler)

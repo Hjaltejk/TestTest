@@ -6,6 +6,8 @@ import { loadSampleOffers } from './providers/sample.js';
 import { collectSearchTerms } from './matcher.js';
 
 const CACHE_HOURS = Number(process.env.OFFER_CACHE_HOURS ?? 6);
+// Hæves når tilbudsformatet ændres, så gamle cachefiler hentes forfra.
+export const CACHE_VERSION = 2;
 
 export function createOfferService({ cacheFile, sampleFile, source = process.env.OFFER_SOURCE ?? 'auto', location = {} }) {
   let memory = null;
@@ -51,8 +53,10 @@ export function createOfferService({ cacheFile, sampleFile, source = process.env
     const ageH = memory ? (Date.now() - new Date(memory.fetchedAt).getTime()) / 36e5 : Infinity;
     const missingTerms = memory?.source === 'tjek' && terms.some((t) => !memory.terms?.includes(t));
 
-    if (force || !memory || ageH > CACHE_HOURS || missingTerms) {
-      memory = await fetchFresh(recipes);
+    const outdated = memory?.version !== CACHE_VERSION;
+
+    if (force || !memory || outdated || ageH > CACHE_HOURS || missingTerms) {
+      memory = { version: CACHE_VERSION, ...(await fetchFresh(recipes)) };
       await writeFile(cacheFile, JSON.stringify(memory, null, 2)).catch(() => {});
     }
     return memory;
