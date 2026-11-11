@@ -12,6 +12,8 @@
   --deal-bg: #eaf4ee;
   --warn-bg: #fff4dc;
   --danger: #b3261e;
+  --eco: #3f7d20;
+  --eco-ink: #ffffff;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -29,6 +31,8 @@
     --deal-bg: #1d3328;
     --warn-bg: #3a3020;
     --danger: #f08a82;
+    --eco: #8fd16a;
+    --eco-ink: #10200a;
     color-scheme: dark;
   }
 }
@@ -128,6 +132,10 @@ dialog h2 { margin-top: 0; }
 table.offers { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 10px; overflow: hidden; font-size: .92rem; }
 .offers th, .offers td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .offers .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Økologi */
+.eco { display: inline-block; background: var(--eco); color: var(--eco-ink); border-radius: 4px; padding: 0 5px; margin-right: 6px; font-size: .72rem; font-weight: 700; line-height: 1.5; vertical-align: 1px; }
+.organic-line { margin: 4px 0; font-size: .9rem; }
 
 /* Udklip fra avisen */
 .lines .offer { display: flex; gap: 8px; align-items: flex-start; }

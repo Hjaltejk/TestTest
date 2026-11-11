@@ -4,7 +4,7 @@ import { extname, join, normalize, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRecipeStore } from './src/recipes.js';
 import { createOfferService } from './src/offers.js';
-import { rankRecipes } from './src/matcher.js';
+import { rankRecipes, DEFAULT_ORGANIC_LEVEL } from './src/matcher.js';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const PUBLIC = join(ROOT, 'public');
@@ -80,6 +80,9 @@ async function handleApi(req, res, url) {
       stores: csv('stores'),
       excludeStores: csv('exclude'),
       sort: url.searchParams.get('sort') ?? 'score',
+      organic: [0, 1, 2].includes(Number(url.searchParams.get('organic')))
+        ? Number(url.searchParams.get('organic'))
+        : DEFAULT_ORGANIC_LEVEL,
     });
     const allStores = [...new Set(data.offers.map((o) => o.store))].sort((a, b) => a.localeCompare(b, 'da'));
     return send(res, 200, {

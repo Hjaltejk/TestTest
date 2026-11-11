@@ -25,7 +25,14 @@
         "exclude": [
           "pålæg",
           "paneret",
-          "nuggets"
+          "nuggets",
+          "svin",
+          "svine",
+          "gris",
+          "grise",
+          "flæsk",
+          "bacon",
+          "skinke"
         ],
         "pantry": false
       },
@@ -119,7 +126,14 @@
         "exclude": [
           "bøf",
           "burger",
-          "færdigret"
+          "færdigret",
+          "svin",
+          "svine",
+          "gris",
+          "grise",
+          "flæsk",
+          "bacon",
+          "skinke"
         ],
         "pantry": false
       },
@@ -557,7 +571,13 @@
         "exclude": [
           "pålæg",
           "hakket",
-          "bacon"
+          "bacon",
+          "svin",
+          "svine",
+          "gris",
+          "grise",
+          "flæsk",
+          "skinke"
         ],
         "pantry": false
       },
@@ -610,31 +630,39 @@
     ]
   },
   {
-    "id": "mørbrad-champignon",
-    "name": "Svinemørbrad i fad med champignon",
-    "description": "Mørbradbøffer i ovn med champignon og let flødesauce, serveret med ris eller kartofler.",
+    "id": "kyllingeoverlaar-champignon",
+    "name": "Kyllingeoverlår i fad med champignon",
+    "description": "Saftige kyllingeoverlår i ovn med champignon og let flødesauce, serveret med ris.",
     "servings": 4,
-    "timeMinutes": 40,
-    "proteinPerServing": 44,
+    "timeMinutes": 45,
+    "proteinPerServing": 42,
     "tags": [
-      "svinekød",
+      "kylling",
       "ovn",
       "weekend"
     ],
     "ingredients": [
       {
-        "name": "Svinemørbrad",
-        "amount": 700,
+        "name": "Kyllingeoverlår uden ben",
+        "amount": 800,
         "unit": "g",
-        "refPrice": 120,
+        "refPrice": 90,
         "match": [
-          "svinemørbrad",
-          "mørbrad"
+          "kyllingeoverlår",
+          "overlår af kylling",
+          "kyllingelår"
         ],
         "exclude": [
-          "bøf af oksemørbrad",
-          "oksemørbrad",
-          "kalv"
+          "grillet",
+          "paneret",
+          "nuggets",
+          "svin",
+          "svine",
+          "gris",
+          "grise",
+          "flæsk",
+          "bacon",
+          "skinke"
         ],
         "pantry": false
       },
@@ -689,7 +717,7 @@
         "pantry": false
       },
       {
-        "name": "Bouillon, paprika, salt, peber",
+        "name": "Bouillon, paprika, timian, salt, peber",
         "amount": 1,
         "unit": "stk",
         "refPrice": 0,
@@ -700,9 +728,9 @@
     ],
     "steps": [
       "Forvarm ovnen til 200 °C.",
-      "Skær mørbraden i medaljoner og brun dem hurtigt på panden.",
+      "Krydr kyllingeoverlårene med salt, peber og paprika, og brun dem på panden.",
       "Læg kødet i et fad med skårne champignoner.",
-      "Hæld fløde rørt med bouillon og paprika over, og bag i 20 minutter.",
+      "Hæld fløde rørt med bouillon og timian over, og bag i 25 minutter.",
       "Server med ris."
     ]
   },
@@ -732,7 +760,14 @@
         "exclude": [
           "bøf",
           "burger",
-          "færdigret"
+          "færdigret",
+          "svin",
+          "svine",
+          "gris",
+          "grise",
+          "flæsk",
+          "bacon",
+          "skinke"
         ],
         "pantry": false
       },
@@ -951,32 +986,39 @@
     ]
   },
   {
-    "id": "frikadeller-kartoffelsalat",
-    "name": "Frikadeller med kartoffelsalat på skyr",
-    "description": "Danske frikadeller med en let kartoffelsalat, hvor mayonnaise er skiftet ud med skyr.",
+    "id": "kyllingefrikadeller-kartoffelsalat",
+    "name": "Kyllingefrikadeller med kartoffelsalat på skyr",
+    "description": "Magre frikadeller af hakket kylling med en let kartoffelsalat, hvor mayonnaise er skiftet ud med skyr.",
     "servings": 4,
     "timeMinutes": 50,
-    "proteinPerServing": 38,
+    "proteinPerServing": 40,
     "tags": [
-      "svinekød",
+      "kylling",
       "dansk",
       "klassiker"
     ],
     "ingredients": [
       {
-        "name": "Hakket svine- og kalvekød",
+        "name": "Hakket kyllingekød",
         "amount": 600,
         "unit": "g",
-        "refPrice": 75,
+        "refPrice": 90,
         "match": [
-          "svine- og kalvekød",
-          "grise- og kalvekød",
-          "svine/kalv",
-          "hakket svin og kalv"
+          "hakket kylling",
+          "hakket kyllingekød",
+          "kyllingefars",
+          "kyllingekød hakket"
         ],
         "exclude": [
+          "færdigret",
           "frikadeller færdige",
-          "færdigret"
+          "svin",
+          "svine",
+          "gris",
+          "grise",
+          "flæsk",
+          "bacon",
+          "skinke"
         ],
         "pantry": false
       },
@@ -1060,7 +1102,7 @@
     ],
     "steps": [
       "Rør farsen med æg, revet løg, havregryn, lidt mælk, salt og peber.",
-      "Form frikadellerne og steg dem ca. 6 minutter på hver side.",
+      "Form frikadellerne og steg dem ca. 5 minutter på hver side, til de er gennemstegte.",
       "Kog kartoflerne, lad dem køle af og skær dem i skiver.",
       "Rør skyr med sennep og purløg, og vend kartoflerne i."
     ]

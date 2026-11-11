@@ -5,6 +5,10 @@ const fmtDate = (d) => (d ? new Date(d).toLocaleDateString('da-DK', { day: 'nume
 const BASE = { g: 'kg', kg: 'kg', ml: 'l', dl: 'l', cl: 'l', l: 'l', stk: 'stk' };
 
 const STORE_KEY = 'tilbudskokken.excludedStores';
+const ORGANIC_KEY = 'tilbudskokken.organic';
+const ORGANIC_RE = /(?<!\p{L})(øko|økologisk|økologiske|organic)(?!\p{L})/iu;
+const isOrganic = (o) => ORGANIC_RE.test(`${o.title} ${o.description ?? ''}`);
+const ecoBadge = (o) => (isOrganic(o) ? '<span class="eco" title="Økologisk">Øko</span>' : '');
 const state = { recipes: [], ranking: null, offers: null, offerById: new Map(), excludedStores: loadExcluded() };
 
 function loadExcluded() {
@@ -27,6 +31,21 @@ async function api(path, opts = {}) {
   if (!res.ok) throw new Error(body.error ?? `Fejl ${res.status}`);
   return body;
 }
+
+/* ---------- Økologi-indstilling ---------- */
+try {
+  const saved = localStorage.getItem(ORGANIC_KEY);
+  if (['0', '1', '2'].includes(saved)) $('#organic').value = saved;
+  else $('#organic').value = '1';
+} catch {
+  $('#organic').value = '1';
+}
+$('#organic').addEventListener('change', () => {
+  try {
+    localStorage.setItem(ORGANIC_KEY, $('#organic').value);
+  } catch {}
+  loadRanking();
+});
 
 /* ---------- Faner ---------- */
 document.querySelectorAll('[data-tab]').forEach((btn) =>
@@ -52,7 +71,7 @@ async function loadRanking(refresh = false) {
   $('#ranking').innerHTML = '<li class="loading">Gennemgår tilbudsaviserne …</li>';
   try {
     // Serveren returnerer altid alle butikker; vi sender kun de fravalgte med.
-    const params = new URLSearchParams({ sort: $('#sort').value });
+    const params = new URLSearchParams({ sort: $('#sort').value, organic: $('#organic').value });
     if (refresh) params.set('refresh', '1');
     if (state.excludedStores.size) params.set('exclude', [...state.excludedStores].join(','));
     const data = await api(`/api/ranking?${params}`);
@@ -103,7 +122,7 @@ function renderRanking(list) {
           if (l.offer) {
             return `<li class="deal">
               <span class="ing">${esc(ing.name)} <small>${esc(amount)}</small></span>
-              <span class="offer">${thumb(l.offer)}<span><b>${esc(l.offer.store)}</b>: ${esc(l.offer.title)} – ${kr(l.offer.price)}
+              <span class="offer">${thumb(l.offer)}<span>${ecoBadge(l.offer)}<b>${esc(l.offer.store)}</b>: ${esc(l.offer.title)} – ${kr(l.offer.price)}
                 <small>(${kr(l.offerUnitPrice)}/${BASE[ing.unit]}, ${l.packs} pk.${l.offer.validTo ? `, til ${fmtDate(l.offer.validTo)}` : ''})</small>
                 <button type="button" class="link" data-offer="${esc(l.offer.id)}">${l.offer.image ? 'Se udklip fra avisen' : 'Se tilbuddet'}</button></span></span>
               <span class="save">−${kr(l.saving)}</span></li>`;
@@ -123,7 +142,7 @@ function renderRanking(list) {
             <p class="meta">${r.recipe.servings} portioner · ${r.recipe.timeMinutes} min. · ${r.proteinPerServing} g protein/portion
               ${(r.recipe.tags ?? []).map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</p>
           </div>
-          <span class="score ${scoreClass(r.score)}" title="Samlet score (0-100)">${r.score}</span>
+          <span class="score ${scoreClass(r.score)}" title="Samlet score (0-100)${r.organicBonus ? `, heraf +${r.organicBonus} for økologi` : ''}">${r.score}</span>
         </div>
         <div class="facts">
           <div><span>Pris nu</span><b>${kr(r.dealCost)}</b><small>normalt ${kr(r.normalCost)}</small></div>
@@ -132,6 +151,7 @@ function renderRanking(list) {
           <div><span>På tilbud</span><b>${deals.length} af ${r.lines.filter((l) => !l.pantry).length}</b><small>${Math.round(r.coveragePct)} % af indkøbet</small></div>
         </div>
         ${r.bestStore ? `<p class="where">Mest at hente i <b>${esc(r.bestStore.store)}</b>${r.stores.length > 1 ? ` · tilbud i ${r.stores.length} butikker: ${stores}` : ''}</p>` : '<p class="where muted">Ingen af ingredienserne er på tilbud lige nu.</p>'}
+        ${r.organicCount ? `<p class="organic-line"><span class="eco">Øko</span> ${r.organicCount} ${r.organicCount === 1 ? 'vare' : 'varer'} kan købes økologisk på tilbud (${Math.round(r.organicPct)} % af indkøbet)${r.organicBonus ? ` · <b>+${r.organicBonus} point</b>` : ''}</p>` : ''}
         <details>
           <summary>Indkøbsliste og fremgangsmåde</summary>
           <ul class="lines">${lines}</ul>
@@ -161,7 +181,7 @@ function renderOffers() {
   $('#offer-rows').innerHTML =
     rows
       .map((o) => {
-        return `<tr class="clickable" data-offer="${esc(o.id)}" tabindex="0"><td class="thumb-col">${thumb(o)}</td><td>${esc(o.title)}<br><small class="muted">${esc(o.description ?? '')}</small></td>
+        return `<tr class="clickable" data-offer="${esc(o.id)}" tabindex="0"><td class="thumb-col">${thumb(o)}</td><td>${ecoBadge(o)}${esc(o.title)}<br><small class="muted">${esc(o.description ?? '')}</small></td>
           <td>${esc(o.store)}</td><td class="num">${kr(o.price)}</td><td class="num muted">${o.prePrice ? kr(o.prePrice) : ''}</td>
           <td class="num">${unitPriceText(o)}</td></tr>`;
       })
@@ -204,7 +224,7 @@ function openOffer(id) {
           : `<p class="muted">${isSample ? 'Demo-tilbud – der findes intet udklip fra en rigtig avis.' : 'Der er intet udklip til dette tilbud.'}</p>`
       }
     </div>
-    <h2 id="od-title">${esc(o.title)}</h2>
+    <h2 id="od-title">${ecoBadge(o)}${esc(o.title)}</h2>
     ${o.description ? `<p class="od-desc">${esc(o.description)}</p>` : ''}
     <p class="od-price"><b>${kr(o.price)}</b>
       ${o.prePrice ? `<s class="muted">${kr(o.prePrice)}</s>` : ''}

@@ -54,10 +54,35 @@ export function isOfferActive(offer, now = new Date()) {
 }
 
 /**
- * Finder det billigste relevante tilbud til en ingrediens.
- * Et tilbud tæller kun som et "godt tilbud", hvis det er billigere end ingrediensens normalpris.
+ * Er tilbuddet økologisk? Kigger efter "økologisk(e)", "øko" og "organic" som
+ * selvstændige ord, så fx "økonomipakke" ikke tæller med.
  */
-export function bestOfferForIngredient(ingredient, offers) {
+export function isOrganicOffer(offer) {
+  const text = normalizeText(`${offer.title} ${offer.description ?? ''}`);
+  return /(?<!\p{L})(øko|økologisk|økologiske|organic)(?!\p{L})/u.test(text);
+}
+
+// Hvor meget økologi vægtes? 0 = ignorér, 1 = lidt (standard), 2 = meget.
+//   preference: hvor mange procent dyrere et økologisk tilbud må være og stadig blive valgt
+//   bonus:      ekstra point, hvis hele indkøbet er økologisk
+export const ORGANIC_LEVELS = {
+  0: { preference: 0, bonus: 0 },
+  1: { preference: 0.15, bonus: 10 },
+  2: { preference: 0.3, bonus: 20 },
+};
+export const DEFAULT_ORGANIC_LEVEL = 1;
+
+export function organicLevel(level) {
+  return ORGANIC_LEVELS[level] ?? ORGANIC_LEVELS[DEFAULT_ORGANIC_LEVEL];
+}
+
+/**
+ * Finder det bedste relevante tilbud til en ingrediens – som udgangspunkt det billigste pr. kg/l/stk.
+ * Med `organicPreference` får økologiske tilbud en rabat i sammenligningen (ikke i prisen),
+ * så et lidt dyrere økologisk tilbud kan vinde over et konventionelt.
+ * Med `maxUnitPrice` ses der bort fra tilbud, der ikke er billigere end den pris.
+ */
+export function bestOfferForIngredient(ingredient, offers, { organicPreference = 0, maxUnitPrice = null } = {}) {
   const need = toBase(ingredient.amount, ingredient.unit);
   if (!need) return null;
   let best = null;
@@ -65,8 +90,11 @@ export function bestOfferForIngredient(ingredient, offers) {
     if (!offerMatchesIngredient(offer, ingredient)) continue;
     const up = offerUnitPrice(offer);
     if (!up || up.dim !== need.dim) continue;
-    if (!best || up.unitPrice < best.unitPrice) {
-      best = { offer, unitPrice: up.unitPrice, packs: Math.ceil(need.qty / up.packQty - 1e-9) };
+    if (maxUnitPrice != null && up.unitPrice >= maxUnitPrice) continue;
+    const organic = isOrganicOffer(offer);
+    const rankPrice = up.unitPrice * (organic ? 1 - organicPreference : 1);
+    if (!best || rankPrice < best.rankPrice) {
+      best = { offer, unitPrice: up.unitPrice, rankPrice, organic, packs: Math.ceil(need.qty / up.packQty - 1e-9) };
     }
   }
   return best;
@@ -86,13 +114,23 @@ export const FULL_SAVINGS_PCT = 0.4;
 
 /**
  * Evaluerer én opskrift mod en liste af (allerede filtrerede) tilbud.
+ * @param {object} [opts]
+ * @param {0|1|2} [opts.organic] Hvor meget økologi vægtes (se ORGANIC_LEVELS).
  */
-export function evaluateRecipe(recipe, offers) {
+export function evaluateRecipe(recipe, offers, opts = {}) {
+  const eco = organicLevel(opts.organic ?? DEFAULT_ORGANIC_LEVEL);
   const lines = [];
   let normalCost = 0;
   let dealCost = 0;
   let coveredNormalCost = 0;
+  let organicNormalCost = 0;
+  let organicCount = 0;
+  // "Værdi": den besparelse det billigste tilbud ville give. Bruges kun til scoren,
+  // så det aldrig koster point at vælge et lidt dyrere økologisk tilbud.
+  // Økologien belønnes i stedet med bonuspoint ovenpå.
+  let valueSavings = 0;
   const storeSavings = new Map();
+  const storeValue = new Map();
 
   for (const ing of recipe.ingredients ?? []) {
     if (ing.pantry) {
@@ -102,17 +140,33 @@ export function evaluateRecipe(recipe, offers) {
     const need = toBase(ing.amount, ing.unit);
     const refPrice = Number(ing.refPrice) || 0;
     const normal = need ? need.qty * refPrice : 0;
-    const best = bestOfferForIngredient(ing, offers);
-    const isDeal = best && (refPrice === 0 || best.unitPrice < refPrice);
+    // Kun tilbud under normalprisen tæller som tilbud. Findes der ingen, vises det
+    // billigste match alligevel som information.
+    const best = bestOfferForIngredient(ing, offers, {
+      organicPreference: eco.preference,
+      maxUnitPrice: refPrice > 0 ? refPrice : null,
+    });
+    const isDeal = Boolean(best);
+    const fallback = isDeal ? null : bestOfferForIngredient(ing, offers);
     const cost = isDeal ? need.qty * best.unitPrice : normal;
     const saving = isDeal && refPrice > 0 ? normal - cost : 0;
+    const cheapest = isDeal && best.organic && eco.preference > 0
+      ? bestOfferForIngredient(ing, offers, { maxUnitPrice: refPrice > 0 ? refPrice : null })
+      : best;
+    const value = isDeal && refPrice > 0 ? normal - need.qty * cheapest.unitPrice : 0;
+    valueSavings += value;
 
     normalCost += normal;
     dealCost += cost;
     if (isDeal) {
       coveredNormalCost += normal;
+      if (best.organic) {
+        organicNormalCost += normal;
+        organicCount += 1;
+      }
       const store = best.offer.store;
       storeSavings.set(store, (storeSavings.get(store) ?? 0) + saving);
+      storeValue.set(store, (storeValue.get(store) ?? 0) + value);
     }
 
     lines.push({
@@ -124,8 +178,9 @@ export function evaluateRecipe(recipe, offers) {
       offer: isDeal ? best.offer : null,
       offerUnitPrice: isDeal ? round2(best.unitPrice) : null,
       packs: isDeal ? best.packs : null,
+      organic: isDeal ? best.organic : false,
       // Et match der ikke er billigere end normalprisen, vises som info.
-      nonDealOffer: !isDeal && best ? best.offer : null,
+      nonDealOffer: fallback ? fallback.offer : null,
     });
   }
 
@@ -137,14 +192,20 @@ export function evaluateRecipe(recipe, offers) {
     .map(([store, s]) => ({ store, savings: round2(s) }))
     .sort((a, b) => b.savings - a.savings);
   const bestStore = stores[0] ?? null;
-  const convenience = savings > 0 && bestStore ? bestStore.savings / savings : 0;
+  const valuePct = normalCost > 0 ? valueSavings / normalCost : 0;
+  const bestStoreValue = Math.max(0, ...storeValue.values());
+  const convenience = valueSavings > 0 ? bestStoreValue / valueSavings : 0;
 
-  const score = Math.round(
+  const baseScore = Math.round(
     100 *
-      (SCORE_WEIGHTS.savings * clamp01(savingsPct / FULL_SAVINGS_PCT) +
+      (SCORE_WEIGHTS.savings * clamp01(valuePct / FULL_SAVINGS_PCT) +
         SCORE_WEIGHTS.coverage * clamp01(coverage) +
         SCORE_WEIGHTS.convenience * clamp01(convenience)),
   );
+  // Økologibonus: andel af indkøbet (i normalpris) der købes økologisk på tilbud.
+  const organicShare = normalCost > 0 ? organicNormalCost / normalCost : 0;
+  const organicBonus = Math.round(eco.bonus * organicShare);
+  const score = Math.min(100, baseScore + organicBonus);
 
   const servings = Number(recipe.servings) || 1;
   const perServing = dealCost / servings;
@@ -154,6 +215,10 @@ export function evaluateRecipe(recipe, offers) {
     recipeId: recipe.id,
     recipe,
     score,
+    baseScore,
+    organicBonus,
+    organicCount,
+    organicPct: round2(organicShare * 100),
     normalCost: round2(normalCost),
     dealCost: round2(dealCost),
     savings: round2(savings),
@@ -176,6 +241,7 @@ export function evaluateRecipe(recipe, offers) {
  * @param {string[]} [opts.excludeStores] Se bort fra tilbud fra disse butikker.
  * @param {Date} [opts.now]
  * @param {'score'|'price'|'protein'|'savings'} [opts.sort]
+ * @param {0|1|2} [opts.organic] Hvor meget økologi vægtes.
  */
 export function rankRecipes(recipes, offers, opts = {}) {
   const now = opts.now ?? new Date();
@@ -185,7 +251,7 @@ export function rankRecipes(recipes, offers, opts = {}) {
     const store = normalizeText(o.store);
     return isOfferActive(o, now) && (!allowed || allowed.has(store)) && !excluded.has(store);
   });
-  const results = recipes.map((r) => evaluateRecipe(r, usable));
+  const results = recipes.map((r) => evaluateRecipe(r, usable, { organic: opts.organic }));
   const sorters = {
     score: (a, b) => b.score - a.score || b.savings - a.savings,
     price: (a, b) => a.costPerServing - b.costPerServing,

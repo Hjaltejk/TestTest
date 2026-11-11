@@ -1,47 +1,416 @@
 [
-  { "store": "Netto", "title": "Danske kyllingebryst", "description": "Fra Danpo. 900 g", "price": 79, "prePrice": 119, "amount": 900, "unit": "g" },
-  { "store": "Netto", "title": "Hakket oksekød 8-12%", "description": "500 g", "price": 40, "prePrice": 55, "amount": 500, "unit": "g" },
-  { "store": "Netto", "title": "Æg fra skrabehøns", "description": "15 stk. str. M/L", "price": 30, "prePrice": 42, "amount": 15, "unit": "stk" },
-  { "store": "Netto", "title": "Kyllingepålæg", "description": "Røget, 3 x 100 g", "price": 20, "prePrice": 30, "amount": 300, "unit": "g" },
-  { "store": "Netto", "title": "Hakkede tomater", "description": "Eget mærke, 400 g", "price": 5, "prePrice": 8, "amount": 400, "unit": "g" },
-  { "store": "Netto", "title": "Bakkeløg", "description": "Løg, 1 kg", "price": 10, "prePrice": 15, "amount": 1, "unit": "kg" },
-
-  { "store": "REMA 1000", "title": "Laksefilet", "description": "Norsk, 4 x 125 g, frost", "price": 75, "prePrice": 110, "amount": 500, "unit": "g" },
-  { "store": "REMA 1000", "title": "Hytteost 1,5%", "description": "500 g", "price": 18, "prePrice": 25, "amount": 500, "unit": "g" },
-  { "store": "REMA 1000", "title": "Skyr naturel", "description": "1 kg", "price": 20, "prePrice": 29, "amount": 1, "unit": "kg" },
-  { "store": "REMA 1000", "title": "Broccoli", "description": "Spansk, klasse 1", "price": 10, "prePrice": 15, "amount": 1, "unit": "stk" },
-  { "store": "REMA 1000", "title": "Røget laks", "description": "Skiver, 200 g", "price": 35, "prePrice": 49, "amount": 200, "unit": "g" },
-  { "store": "REMA 1000", "title": "Kartofler", "description": "Danske, 2 kg", "price": 20, "prePrice": 30, "amount": 2, "unit": "kg" },
-
-  { "store": "Lidl", "title": "Kalkunbryst", "description": "Hel, ca. 1 kg", "price": 89, "prePrice": 139, "amount": 1, "unit": "kg" },
-  { "store": "Lidl", "title": "Ægnudler", "description": "250 g", "price": 9, "prePrice": 12, "amount": 250, "unit": "g" },
-  { "store": "Lidl", "title": "Wokgrøntsager", "description": "Frost, 750 g", "price": 15, "prePrice": 22, "amount": 750, "unit": "g" },
-  { "store": "Lidl", "title": "Feta i tern", "description": "200 g", "price": 15, "prePrice": 20, "amount": 200, "unit": "g" },
-  { "store": "Lidl", "title": "Peberfrugter", "description": "Mix, 3 stk", "price": 15, "prePrice": 24, "amount": 3, "unit": "stk" },
-  { "store": "Lidl", "title": "Græsk yoghurt 2%", "description": "1 kg", "price": 25, "prePrice": 35, "amount": 1, "unit": "kg" },
-
-  { "store": "Føtex", "title": "Svinemørbrad", "description": "Dansk, ca. 500 g", "price": 45, "prePrice": 65, "amount": 500, "unit": "g" },
-  { "store": "Føtex", "title": "Champignon", "description": "Bakke, 250 g", "price": 10, "prePrice": 15, "amount": 250, "unit": "g" },
-  { "store": "Føtex", "title": "Madlavningsfløde 9%", "description": "250 ml", "price": 8, "prePrice": 10, "amount": 250, "unit": "ml" },
-  { "store": "Føtex", "title": "Torskefilet", "description": "Frost, 400 g", "price": 59, "prePrice": 85, "amount": 400, "unit": "g" },
-  { "store": "Føtex", "title": "Rødløg", "description": "500 g", "price": 8, "prePrice": 12, "amount": 500, "unit": "g" },
-  { "store": "Føtex", "title": "Tun i vand", "description": "3 x 120 g (afdryppet)", "price": 30, "prePrice": 42, "amount": 360, "unit": "g" },
-
-  { "store": "Bilka", "title": "Jasminris", "description": "1 kg", "price": 15, "prePrice": 25, "amount": 1, "unit": "kg" },
-  { "store": "Bilka", "title": "Pasta fusilli", "description": "1 kg", "price": 12, "prePrice": 18, "amount": 1, "unit": "kg" },
-  { "store": "Bilka", "title": "Lasagneplader", "description": "500 g", "price": 12, "prePrice": 16, "amount": 500, "unit": "g" },
-  { "store": "Bilka", "title": "Revet ost mozzarella", "description": "400 g", "price": 25, "prePrice": 36, "amount": 400, "unit": "g" },
-  { "store": "Bilka", "title": "Hakket svine- og kalvekød 8-12%", "description": "1 kg", "price": 50, "prePrice": 75, "amount": 1, "unit": "kg" },
-  { "store": "Bilka", "title": "Risengrød", "description": "Færdigret, 1 kg", "price": 15, "prePrice": 25, "amount": 1, "unit": "kg" },
-
-  { "store": "Coop 365", "title": "Grønne linser", "description": "500 g", "price": 12, "prePrice": 18, "amount": 500, "unit": "g" },
-  { "store": "Coop 365", "title": "Gulerødder", "description": "Danske, 1 kg", "price": 8, "prePrice": 12, "amount": 1, "unit": "kg" },
-  { "store": "Coop 365", "title": "Cherrytomater", "description": "250 g", "price": 10, "prePrice": 15, "amount": 250, "unit": "g" },
-  { "store": "Coop 365", "title": "Citroner", "description": "Net, 4 stk", "price": 10, "prePrice": 16, "amount": 4, "unit": "stk" },
-  { "store": "Coop 365", "title": "Kidneybønner", "description": "400 g", "price": 6, "prePrice": 9, "amount": 400, "unit": "g" },
-
-  { "store": "Meny", "title": "Hakket oksekød 4-7%", "description": "Dansk, 400 g", "price": 45, "prePrice": 60, "amount": 400, "unit": "g" },
-  { "store": "Meny", "title": "Babyspinat", "description": "200 g", "price": 12, "prePrice": 20, "amount": 200, "unit": "g" },
-  { "store": "Meny", "title": "Ærter", "description": "Frost, 1 kg", "price": 20, "prePrice": 28, "amount": 1, "unit": "kg" },
-  { "store": "Meny", "title": "Laksefilet", "description": "Frisk, 2 x 125 g", "price": 59, "prePrice": 69, "amount": 250, "unit": "g" }
+  {
+    "store": "Netto",
+    "title": "Danske kyllingebryst",
+    "description": "Fra Danpo. 900 g",
+    "price": 79,
+    "prePrice": 119,
+    "amount": 900,
+    "unit": "g"
+  },
+  {
+    "store": "Netto",
+    "title": "Hakket oksekød 8-12%",
+    "description": "500 g",
+    "price": 40,
+    "prePrice": 55,
+    "amount": 500,
+    "unit": "g"
+  },
+  {
+    "store": "Netto",
+    "title": "Æg fra skrabehøns",
+    "description": "15 stk. str. M/L",
+    "price": 30,
+    "prePrice": 42,
+    "amount": 15,
+    "unit": "stk"
+  },
+  {
+    "store": "Netto",
+    "title": "Kyllingepålæg",
+    "description": "Røget, 3 x 100 g",
+    "price": 20,
+    "prePrice": 30,
+    "amount": 300,
+    "unit": "g"
+  },
+  {
+    "store": "Netto",
+    "title": "Hakkede tomater",
+    "description": "Eget mærke, 400 g",
+    "price": 5,
+    "prePrice": 8,
+    "amount": 400,
+    "unit": "g"
+  },
+  {
+    "store": "Netto",
+    "title": "Bakkeløg",
+    "description": "Løg, 1 kg",
+    "price": 10,
+    "prePrice": 15,
+    "amount": 1,
+    "unit": "kg"
+  },
+  {
+    "store": "REMA 1000",
+    "title": "Laksefilet",
+    "description": "Norsk, 4 x 125 g, frost",
+    "price": 75,
+    "prePrice": 110,
+    "amount": 500,
+    "unit": "g"
+  },
+  {
+    "store": "REMA 1000",
+    "title": "Hytteost 1,5%",
+    "description": "500 g",
+    "price": 18,
+    "prePrice": 25,
+    "amount": 500,
+    "unit": "g"
+  },
+  {
+    "store": "REMA 1000",
+    "title": "Skyr naturel",
+    "description": "1 kg",
+    "price": 20,
+    "prePrice": 29,
+    "amount": 1,
+    "unit": "kg"
+  },
+  {
+    "store": "REMA 1000",
+    "title": "Broccoli",
+    "description": "Spansk, klasse 1",
+    "price": 10,
+    "prePrice": 15,
+    "amount": 1,
+    "unit": "stk"
+  },
+  {
+    "store": "REMA 1000",
+    "title": "Røget laks",
+    "description": "Skiver, 200 g",
+    "price": 35,
+    "prePrice": 49,
+    "amount": 200,
+    "unit": "g"
+  },
+  {
+    "store": "REMA 1000",
+    "title": "Kartofler",
+    "description": "Danske, 2 kg",
+    "price": 20,
+    "prePrice": 30,
+    "amount": 2,
+    "unit": "kg"
+  },
+  {
+    "store": "Lidl",
+    "title": "Kalkunbryst",
+    "description": "Hel, ca. 1 kg",
+    "price": 89,
+    "prePrice": 139,
+    "amount": 1,
+    "unit": "kg"
+  },
+  {
+    "store": "Lidl",
+    "title": "Ægnudler",
+    "description": "250 g",
+    "price": 9,
+    "prePrice": 12,
+    "amount": 250,
+    "unit": "g"
+  },
+  {
+    "store": "Lidl",
+    "title": "Wokgrøntsager",
+    "description": "Frost, 750 g",
+    "price": 15,
+    "prePrice": 22,
+    "amount": 750,
+    "unit": "g"
+  },
+  {
+    "store": "Lidl",
+    "title": "Feta i tern",
+    "description": "200 g",
+    "price": 15,
+    "prePrice": 20,
+    "amount": 200,
+    "unit": "g"
+  },
+  {
+    "store": "Lidl",
+    "title": "Peberfrugter",
+    "description": "Mix, 3 stk",
+    "price": 15,
+    "prePrice": 24,
+    "amount": 3,
+    "unit": "stk"
+  },
+  {
+    "store": "Lidl",
+    "title": "Græsk yoghurt 2%",
+    "description": "1 kg",
+    "price": 25,
+    "prePrice": 35,
+    "amount": 1,
+    "unit": "kg"
+  },
+  {
+    "store": "Føtex",
+    "title": "Kyllingeoverlår uden ben",
+    "description": "Dansk, 800 g",
+    "price": 55,
+    "prePrice": 79,
+    "amount": 800,
+    "unit": "g"
+  },
+  {
+    "store": "Føtex",
+    "title": "Champignon",
+    "description": "Bakke, 250 g",
+    "price": 10,
+    "prePrice": 15,
+    "amount": 250,
+    "unit": "g"
+  },
+  {
+    "store": "Føtex",
+    "title": "Madlavningsfløde 9%",
+    "description": "250 ml",
+    "price": 8,
+    "prePrice": 10,
+    "amount": 250,
+    "unit": "ml"
+  },
+  {
+    "store": "Føtex",
+    "title": "Torskefilet",
+    "description": "Frost, 400 g",
+    "price": 59,
+    "prePrice": 85,
+    "amount": 400,
+    "unit": "g"
+  },
+  {
+    "store": "Føtex",
+    "title": "Rødløg",
+    "description": "500 g",
+    "price": 8,
+    "prePrice": 12,
+    "amount": 500,
+    "unit": "g"
+  },
+  {
+    "store": "Føtex",
+    "title": "Tun i vand",
+    "description": "3 x 120 g (afdryppet)",
+    "price": 30,
+    "prePrice": 42,
+    "amount": 360,
+    "unit": "g"
+  },
+  {
+    "store": "Bilka",
+    "title": "Jasminris",
+    "description": "1 kg",
+    "price": 15,
+    "prePrice": 25,
+    "amount": 1,
+    "unit": "kg"
+  },
+  {
+    "store": "Bilka",
+    "title": "Pasta fusilli",
+    "description": "1 kg",
+    "price": 12,
+    "prePrice": 18,
+    "amount": 1,
+    "unit": "kg"
+  },
+  {
+    "store": "Bilka",
+    "title": "Lasagneplader",
+    "description": "500 g",
+    "price": 12,
+    "prePrice": 16,
+    "amount": 500,
+    "unit": "g"
+  },
+  {
+    "store": "Bilka",
+    "title": "Revet ost mozzarella",
+    "description": "400 g",
+    "price": 25,
+    "prePrice": 36,
+    "amount": 400,
+    "unit": "g"
+  },
+  {
+    "store": "Bilka",
+    "title": "Hakket kyllingekød 4-7%",
+    "description": "500 g",
+    "price": 35,
+    "prePrice": 49,
+    "amount": 500,
+    "unit": "g"
+  },
+  {
+    "store": "Bilka",
+    "title": "Risengrød",
+    "description": "Færdigret, 1 kg",
+    "price": 15,
+    "prePrice": 25,
+    "amount": 1,
+    "unit": "kg"
+  },
+  {
+    "store": "Coop 365",
+    "title": "Grønne linser",
+    "description": "500 g",
+    "price": 12,
+    "prePrice": 18,
+    "amount": 500,
+    "unit": "g"
+  },
+  {
+    "store": "Coop 365",
+    "title": "Gulerødder",
+    "description": "Danske, 1 kg",
+    "price": 8,
+    "prePrice": 12,
+    "amount": 1,
+    "unit": "kg"
+  },
+  {
+    "store": "Coop 365",
+    "title": "Cherrytomater",
+    "description": "250 g",
+    "price": 10,
+    "prePrice": 15,
+    "amount": 250,
+    "unit": "g"
+  },
+  {
+    "store": "Coop 365",
+    "title": "Citroner",
+    "description": "Net, 4 stk",
+    "price": 10,
+    "prePrice": 16,
+    "amount": 4,
+    "unit": "stk"
+  },
+  {
+    "store": "Coop 365",
+    "title": "Kidneybønner",
+    "description": "400 g",
+    "price": 6,
+    "prePrice": 9,
+    "amount": 400,
+    "unit": "g"
+  },
+  {
+    "store": "Meny",
+    "title": "Hakket oksekød 4-7%",
+    "description": "Dansk, 400 g",
+    "price": 45,
+    "prePrice": 60,
+    "amount": 400,
+    "unit": "g"
+  },
+  {
+    "store": "Meny",
+    "title": "Babyspinat",
+    "description": "200 g",
+    "price": 12,
+    "prePrice": 20,
+    "amount": 200,
+    "unit": "g"
+  },
+  {
+    "store": "Meny",
+    "title": "Ærter",
+    "description": "Frost, 1 kg",
+    "price": 20,
+    "prePrice": 28,
+    "amount": 1,
+    "unit": "kg"
+  },
+  {
+    "store": "Meny",
+    "title": "Laksefilet",
+    "description": "Frisk, 2 x 125 g",
+    "price": 59,
+    "prePrice": 69,
+    "amount": 250,
+    "unit": "g"
+  },
+  {
+    "store": "Netto",
+    "title": "Økologiske æg",
+    "description": "15 stk. fra fritgående høns",
+    "price": 39,
+    "prePrice": 49,
+    "amount": 15,
+    "unit": "stk"
+  },
+  {
+    "store": "Netto",
+    "title": "Øko hakket oksekød 8-12%",
+    "description": "500 g",
+    "price": 49,
+    "prePrice": 65,
+    "amount": 500,
+    "unit": "g"
+  },
+  {
+    "store": "REMA 1000",
+    "title": "Øko skyr naturel",
+    "description": "1 kg",
+    "price": 22,
+    "prePrice": 32,
+    "amount": 1,
+    "unit": "kg"
+  },
+  {
+    "store": "Coop 365",
+    "title": "Økologiske gulerødder",
+    "description": "1 kg",
+    "price": 9,
+    "prePrice": 15,
+    "amount": 1,
+    "unit": "kg"
+  },
+  {
+    "store": "Lidl",
+    "title": "Økologiske hakkede tomater",
+    "description": "400 g",
+    "price": 7,
+    "prePrice": 10,
+    "amount": 400,
+    "unit": "g"
+  },
+  {
+    "store": "Lidl",
+    "title": "Økonomipakke kyllingebryst",
+    "description": "2 kg, frost",
+    "price": 159,
+    "prePrice": 199,
+    "amount": 2,
+    "unit": "kg"
+  },
+  {
+    "store": "Meny",
+    "title": "Hakket okse- og svinekød",
+    "description": "8-12 %, 1 kg",
+    "price": 49,
+    "prePrice": 69,
+    "amount": 1,
+    "unit": "kg"
+  }
 ]

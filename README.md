@@ -28,9 +28,23 @@ Appen starter med 10 proteinrige testopskrifter i `data/recipes.json`.
    - 30 % — hvor stor en del af indkøbet der er på tilbud
    - 20 % — hvor meget af besparelsen du kan hente i én butik (færre butikker = nemmere)
 
+   Derudover kan opskriften få **bonuspoint for økologi** (se nedenfor).
+
    Du kan også sortere efter pris pr. portion, protein pr. krone eller største besparelse, og fravælge butikker, du ikke handler i.
 
 5. **Kilde.** Klik på "Se udklip fra avisen" ved en ingrediens på tilbud, eller på en række under "Tilbud". Så ser du udklippet fra tilbudsavisen, ligesom på eTilbudsavis, sammen med butik, gyldighedsperiode, førpris og hvilken side i avisen tilbuddet står på. Klik på udklippet for at se det i fuld størrelse.
+
+### Økologi
+
+Et tilbud regnes som økologisk, hvis titlen eller beskrivelsen indeholder "økologisk", "økologiske", "øko" eller "organic" som et selvstændigt ord ("Økonomipakke" tæller altså ikke). Med valget **Økologi** øverst bestemmer du, hvor meget det skal betyde:
+
+| Valg | Økologisk tilbud vælges, hvis det højst er … dyrere end det billigste | Bonus, hvis hele indkøbet er økologisk |
+| --- | --- | --- |
+| Betyder ikke noget | 0 % | 0 point |
+| Giv lidt ekstra point (standard) | 15 % | +10 point |
+| Giv mange ekstra point | 30 % | +20 point |
+
+Bonussen gives efter, hvor stor en del af indkøbet (målt i normalpris) der kan købes økologisk på tilbud. Besparelsesdelen af scoren regnes altid ud fra det billigste tilbud, så det koster aldrig point at vælge økologisk. Et økologisk tilbud skal stadig være billigere end din normalpris for at tælle med.
 
 Hvis appen ikke kan nå Tjek (fx uden internet), bruger den demo-tilbud fra `data/sample-offers.json`. Det står tydeligt øverst på siden.
 
