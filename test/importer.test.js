@@ -65,6 +65,7 @@ test('importerer JSON-LD i @graph (WordPress-opskriftsplugins)', async () => {
   assert.equal(recipe.servings, 4);
   assert.equal(recipe.timeMinutes, 45);
   assert.equal(recipe.sourceUrl, 'https://madblog.example/kyllingegryde');
+  assert.equal(recipe.image, 'https://madblog.example/billeder/gryde.jpg');
   assert.deepEqual(recipe.steps, [
     'Skær kyllingen i tern og brun den i olien.',
     'Tilsæt løg, hvidløg og spidskommen.',
@@ -85,6 +86,8 @@ test('importerer JSON-LD i @graph (WordPress-opskriftsplugins)', async () => {
   // Udkastet skal kunne gemmes, som det er.
   assert.doesNotThrow(() => sanitizeRecipe(recipe));
   assert.equal(sanitizeRecipe(recipe).sourceUrl, 'https://madblog.example/kyllingegryde');
+  assert.equal(sanitizeRecipe(recipe).image, 'https://madblog.example/billeder/gryde.jpg');
+  assert.equal(sanitizeRecipe({ ...recipe, image: 'javascript:alert(1)' }).image, undefined);
 });
 
 test('importerer microdata', async () => {

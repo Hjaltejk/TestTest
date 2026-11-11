@@ -210,6 +210,19 @@ function parseProtein(nutrition) {
   return m ? Number(m[1].replace(',', '.')) : null;
 }
 
+/** Første billed-URL fra schema.org (streng, liste eller ImageObject). */
+export function pickImage(v, base) {
+  const first = Array.isArray(v) ? v[0] : v;
+  const url = typeof first === 'string' ? first : first?.url ?? first?.contentUrl;
+  if (!url) return '';
+  try {
+    const u = new URL(decodeEntities(url), base);
+    return ['http:', 'https:'].includes(u.protocol) ? u.href : '';
+  } catch {
+    return '';
+  }
+}
+
 /** Finder rå opskriftsdata i en HTML-side, eller null. */
 export function extractRecipe(html) {
   return fromJsonLd(html) ?? fromMicrodata(html);
@@ -270,6 +283,7 @@ export function recipeDraftFromHtml(html, sourceUrl) {
       ingredients,
       steps: flattenInstructions(raw.recipeInstructions),
       sourceUrl,
+      image: pickImage(raw.image, sourceUrl) || pickImage(html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)/i)?.[1], sourceUrl),
     },
     warnings,
   };

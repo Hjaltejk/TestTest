@@ -2,137 +2,66 @@
 <html lang="da">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0c0d" media="(prefers-color-scheme: dark)">
   <title>Tilbudskøkkenet</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2315803d'/%3E%3Cpath d='M9 17.5l4.5 4.5L23 11' stroke='white' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="top">
-    <div class="wrap">
-      <h1>Tilbudskøkkenet</h1>
-      <p class="sub">Hvilken af dine opskrifter er billigst at lave lige nu?</p>
-      <nav class="tabs" role="tablist">
-        <button role="tab" data-tab="ranking" aria-selected="true">Bedst lige nu</button>
-        <button role="tab" data-tab="recipes" aria-selected="false">Mine opskrifter</button>
-        <button role="tab" data-tab="offers" aria-selected="false">Tilbud</button>
+  <a class="skip" href="#main">Spring til indhold</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#/" aria-label="Tilbudskøkkenet – forside">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8"/><path d="M9 17.5l4.5 4.5L23 11"/></svg>
+        </span>
+        <span class="brand-name">Tilbudskøkkenet</span>
+      </a>
+      <nav class="nav" aria-label="Hovedmenu">
+        <a href="#/" data-route="ranking">
+          <svg class="i" viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 21l1.6-7L2 9.2l7.1-.6z"/></svg>
+          <span>I dag</span>
+        </a>
+        <a href="#/opskrifter" data-route="recipes">
+          <svg class="i" viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6.5A2.5 2.5 0 0 0 4 21.5 2.5 2.5 0 0 0 6.5 24H19"/><path d="M9 7h6"/></svg>
+          <span>Opskrifter</span>
+        </a>
+        <a href="#/tilbud" data-route="offers">
+          <svg class="i" viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
+          <span>Tilbud</span>
+        </a>
       </nav>
     </div>
   </header>
 
-  <main class="wrap">
-    <section id="status" class="status" aria-live="polite"></section>
-
-    <!-- Rangering -->
-    <section id="tab-ranking" class="tab">
-      <div class="toolbar">
-        <label>Sortér efter
-          <select id="sort">
-            <option value="score">Samlet score</option>
-            <option value="price">Pris pr. portion</option>
-            <option value="protein">Protein pr. krone</option>
-            <option value="savings">Største besparelse</option>
-          </select>
-        </label>
-        <label>Økologi
-          <select id="organic">
-            <option value="0">Betyder ikke noget</option>
-            <option value="1">Giv lidt ekstra point</option>
-            <option value="2">Giv mange ekstra point</option>
-          </select>
-        </label>
-        <button id="refresh" class="secondary">Hent nye tilbud</button>
-      </div>
-      <details class="stores">
-        <summary>Butikker jeg handler i <span id="store-count"></span></summary>
-        <p class="hint">Fravælg butikker, der er besværlige at komme til. Kun tilbud fra de valgte butikker tælles med.</p>
-        <div id="store-list" class="store-list"></div>
-      </details>
-      <ol id="ranking" class="ranking"></ol>
-    </section>
-
-    <!-- Opskrifter -->
-    <section id="tab-recipes" class="tab" hidden>
-      <div class="toolbar">
-        <button id="new-recipe">+ Ny opskrift</button>
-      </div>
-      <form id="import-form" class="import">
-        <label for="import-url">Hent opskrift fra et link</label>
-        <div class="import-row">
-          <input id="import-url" type="url" inputmode="url" placeholder="https://… link til en opskrift" required>
-          <button type="submit" id="import-btn">Hent opskrift</button>
-        </div>
-        <p class="hint">Virker med de fleste opskriftssider. Du får opskriften vist, så du kan rette den til, før den gemmes.</p>
-        <p id="import-error" class="error" hidden></p>
-      </form>
-      <ul id="recipe-list" class="recipe-list"></ul>
-
-      <dialog id="recipe-dialog">
-        <form id="recipe-form" method="dialog">
-          <h2 id="form-title">Ny opskrift</h2>
-          <div id="form-notice" class="notice" hidden></div>
-          <input type="hidden" name="sourceUrl">
-          <div class="grid">
-            <label class="span2">Navn <input name="name" required></label>
-            <label class="span2">Beskrivelse <textarea name="description" rows="2"></textarea></label>
-            <label>Portioner <input name="servings" type="number" min="1" value="4"></label>
-            <label>Tid (min.) <input name="timeMinutes" type="number" min="0" value="30"></label>
-            <label>Protein pr. portion (g) <input name="proteinPerServing" type="number" min="0" step="1"></label>
-            <label>Tags <input name="tags" placeholder="fx kylling, hurtig"></label>
-          </div>
-
-          <h3>Ingredienser</h3>
-          <p class="hint">
-            <b>Normalpris</b> er hvad varen typisk koster uden tilbud – i kr. pr. kg, pr. liter eller pr. stk. afhængigt af enheden.
-            <b>Søgeord</b> er de ord, der skal stå i tilbudsavisen (kommasepareret). <b>Udelad</b> er ord, der betyder at tilbuddet ikke passer (fx "røget" for laks).
-            Sæt flueben i <b>Har altid</b> for krydderier, olie o.l., som ikke skal tælles med.
-          </p>
-          <div id="ingredient-rows" class="ing-rows"></div>
-          <button type="button" id="add-ingredient" class="secondary">+ Tilføj ingrediens</button>
-
-          <label class="block">Fremgangsmåde (ét trin pr. linje)
-            <textarea name="steps" rows="5"></textarea>
-          </label>
-
-          <p id="form-error" class="error" hidden></p>
-          <div class="actions">
-            <button type="button" id="cancel" class="secondary">Annullér</button>
-            <button type="submit" id="save">Gem opskrift</button>
-          </div>
-        </form>
-      </dialog>
-    </section>
-
-    <!-- Tilbud -->
-    <section id="tab-offers" class="tab" hidden>
-      <div class="toolbar">
-        <input id="offer-filter" type="search" placeholder="Søg i tilbud …">
-      </div>
-      <table class="offers">
-        <thead><tr><th class="thumb-col"><span class="sr">Udklip</span></th><th>Vare</th><th>Butik</th><th class="num">Pris</th><th class="num">Før</th><th class="num">Enhedspris</th></tr></thead>
-        <tbody id="offer-rows"></tbody>
-      </table>
-    </section>
+  <main id="main" class="main" tabindex="-1">
+    <section id="view-ranking" class="view" aria-labelledby="ranking-title"></section>
+    <section id="view-recipes" class="view" aria-labelledby="recipes-title" hidden></section>
+    <section id="view-offers" class="view" aria-labelledby="offers-title" hidden></section>
   </main>
 
-  <dialog id="offer-dialog" class="offer-dialog" aria-labelledby="od-title">
-    <div id="offer-detail"></div>
-    <div class="actions"><button type="button" id="offer-close" class="secondary">Luk</button></div>
+  <!-- Detaljepanel for en opskrift -->
+  <dialog id="sheet" class="sheet" aria-labelledby="sheet-title">
+    <div class="sheet-body" id="sheet-body"></div>
   </dialog>
 
-  <template id="ingredient-row">
-    <div class="ing-row">
-      <input data-f="name" placeholder="Ingrediens" aria-label="Ingrediens">
-      <input data-f="amount" type="number" step="any" min="0" placeholder="Mængde" aria-label="Mængde">
-      <select data-f="unit" aria-label="Enhed">
-        <option>g</option><option>kg</option><option>ml</option><option>dl</option><option>l</option><option>stk</option>
-      </select>
-      <input data-f="refPrice" type="number" step="any" min="0" placeholder="Normalpris" aria-label="Normalpris">
-      <input data-f="match" placeholder="Søgeord" aria-label="Søgeord">
-      <input data-f="exclude" placeholder="Udelad" aria-label="Udelad">
-      <label class="pantry"><input data-f="pantry" type="checkbox"> Har altid</label>
-      <button type="button" class="remove" aria-label="Fjern ingrediens">×</button>
-    </div>
-  </template>
+  <!-- Avisudklip -->
+  <dialog id="clip" class="modal modal-sm" aria-labelledby="clip-title">
+    <div id="clip-body"></div>
+  </dialog>
+
+  <!-- Opret/redigér opskrift -->
+  <dialog id="editor" class="modal modal-lg" aria-labelledby="editor-title">
+    <form id="editor-form" novalidate></form>
+  </dialog>
+
+  <div id="toasts" class="toasts" role="status" aria-live="polite"></div>
 
   <script type="module" src="app.js"></script>
 </body>

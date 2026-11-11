@@ -39,12 +39,17 @@ export function sanitizeRecipe(input) {
     throw err;
   }
 
-  // Link til den oprindelige opskrift (kun http/https).
-  let sourceUrl = '';
-  try {
-    const u = new URL(str(input.sourceUrl));
-    if (['http:', 'https:'].includes(u.protocol)) sourceUrl = u.href;
-  } catch {}
+  // Link til den oprindelige opskrift og et billede (kun http/https).
+  const httpUrl = (v) => {
+    try {
+      const u = new URL(str(v));
+      return ['http:', 'https:'].includes(u.protocol) ? u.href : '';
+    } catch {
+      return '';
+    }
+  };
+  const sourceUrl = httpUrl(input.sourceUrl);
+  const image = httpUrl(input.image);
 
   return {
     id: str(input.id) || randomUUID(),
@@ -57,6 +62,7 @@ export function sanitizeRecipe(input) {
     ingredients,
     steps: list(Array.isArray(input.steps) ? input.steps : str(input.steps).split('\n')),
     ...(sourceUrl ? { sourceUrl } : {}),
+    ...(image ? { image } : {}),
   };
 }
 
