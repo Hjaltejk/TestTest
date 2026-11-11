@@ -1,0 +1,15 @@
+{
+  "name": "tilbudskokken",
+  "version": "0.1.0",
+  "description": "Finder de opskrifter, der er billigst at lave lige nu, ud fra supermarkedernes tilbudsaviser.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,1068 @@
+[
+  {
+    "id": "kylling-ris-broccoli",
+    "name": "Kyllingebryst med ris og broccoli",
+    "description": "Klassisk \"meal prep\"-ret: stegt kyllingebryst med jasminris, broccoli og en hurtig yoghurtsauce.",
+    "servings": 4,
+    "timeMinutes": 30,
+    "proteinPerServing": 48,
+    "tags": [
+      "kylling",
+      "meal prep",
+      "hverdag"
+    ],
+    "ingredients": [
+      {
+        "name": "Kyllingebryst",
+        "amount": 800,
+        "unit": "g",
+        "refPrice": 130,
+        "match": [
+          "kyllingebryst",
+          "kyllingefilet",
+          "kyllingeinderfilet"
+        ],
+        "exclude": [
+          "pålæg",
+          "paneret",
+          "nuggets"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Ris",
+        "amount": 300,
+        "unit": "g",
+        "refPrice": 25,
+        "match": [
+          "jasminris",
+          "basmatiris",
+          "ris"
+        ],
+        "exclude": [
+          "risengrød",
+          "grødris",
+          "riskiks",
+          "risotto",
+          "rispapir",
+          "risalamande",
+          "nudler"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Broccoli",
+        "amount": 2,
+        "unit": "stk",
+        "refPrice": 15,
+        "match": [
+          "broccoli"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Græsk yoghurt",
+        "amount": 400,
+        "unit": "g",
+        "refPrice": 40,
+        "match": [
+          "græsk yoghurt",
+          "yoghurt naturel"
+        ],
+        "exclude": [
+          "drikke"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Olie, salt, peber, hvidløg",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 0,
+        "match": [],
+        "exclude": [],
+        "pantry": true
+      }
+    ],
+    "steps": [
+      "Kog risene efter anvisningen på pakken.",
+      "Krydr kyllingebrysterne med salt, peber og paprika, og steg dem 6-7 minutter på hver side.",
+      "Del broccolien i buketter og damp den i 4-5 minutter.",
+      "Rør yoghurten med presset hvidløg, salt og citron.",
+      "Skær kyllingen i skiver og server med ris, broccoli og sauce."
+    ]
+  },
+  {
+    "id": "chili-con-carne",
+    "name": "Chili con carne",
+    "description": "Mættende gryde med hakket oksekød, kidneybønner og tomat. Kan sagtens laves i dobbelt portion og fryses.",
+    "servings": 4,
+    "timeMinutes": 45,
+    "proteinPerServing": 42,
+    "tags": [
+      "oksekød",
+      "gryderet",
+      "fryser"
+    ],
+    "ingredients": [
+      {
+        "name": "Hakket oksekød 8-12%",
+        "amount": 600,
+        "unit": "g",
+        "refPrice": 110,
+        "match": [
+          "hakket oksekød",
+          "hakket okse",
+          "oksefars"
+        ],
+        "exclude": [
+          "bøf",
+          "burger",
+          "færdigret"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Kidneybønner",
+        "amount": 400,
+        "unit": "g",
+        "refPrice": 25,
+        "match": [
+          "kidneybønner"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Hakkede tomater",
+        "amount": 800,
+        "unit": "g",
+        "refPrice": 20,
+        "match": [
+          "hakkede tomater",
+          "flåede tomater"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Løg",
+        "amount": 300,
+        "unit": "g",
+        "refPrice": 15,
+        "match": [
+          "løg"
+        ],
+        "exclude": [
+          "forårsløg",
+          "rødløg",
+          "ristede",
+          "syltede",
+          "løgringe"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Peberfrugt",
+        "amount": 2,
+        "unit": "stk",
+        "refPrice": 8,
+        "match": [
+          "peberfrugt",
+          "peberfrugter"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Skyr til servering",
+        "amount": 300,
+        "unit": "g",
+        "refPrice": 30,
+        "match": [
+          "skyr"
+        ],
+        "exclude": [
+          "drikke",
+          "shot"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Chili, spidskommen, bouillon",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 0,
+        "match": [],
+        "exclude": [],
+        "pantry": true
+      }
+    ],
+    "steps": [
+      "Hak løg og peberfrugt, og svits dem i en gryde.",
+      "Tilsæt kødet og brun det godt.",
+      "Tilsæt krydderier, tomater og afdryppede kidneybønner.",
+      "Lad gryden simre under låg i 25-30 minutter.",
+      "Server med en klat skyr og evt. ris eller brød."
+    ]
+  },
+  {
+    "id": "laks-kartofler-spinat",
+    "name": "Ovnbagt laks med kartofler og spinat",
+    "description": "Laks i ovn med citron, nye kartofler og spinat svitset med hvidløg.",
+    "servings": 4,
+    "timeMinutes": 35,
+    "proteinPerServing": 40,
+    "tags": [
+      "fisk",
+      "ovn"
+    ],
+    "ingredients": [
+      {
+        "name": "Laksefilet",
+        "amount": 600,
+        "unit": "g",
+        "refPrice": 220,
+        "match": [
+          "laksefilet",
+          "laks"
+        ],
+        "exclude": [
+          "røget",
+          "gravad",
+          "pålæg",
+          "rogn"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Kartofler",
+        "amount": 1000,
+        "unit": "g",
+        "refPrice": 18,
+        "match": [
+          "kartofler"
+        ],
+        "exclude": [
+          "søde",
+          "chips",
+          "fritter",
+          "pommes",
+          "mos",
+          "både"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Spinat",
+        "amount": 250,
+        "unit": "g",
+        "refPrice": 80,
+        "match": [
+          "spinat",
+          "babyspinat"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Citron",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 5,
+        "match": [
+          "citron",
+          "citroner"
+        ],
+        "exclude": [
+          "saft",
+          "te"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Olie, hvidløg, salt, peber",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 0,
+        "match": [],
+        "exclude": [],
+        "pantry": true
+      }
+    ],
+    "steps": [
+      "Forvarm ovnen til 200 °C.",
+      "Kog kartoflerne møre.",
+      "Læg laksen i et fad, krydr med salt, peber og citronskiver, og bag den i 12-15 minutter.",
+      "Svits spinaten kort med hvidløg.",
+      "Server laksen med kartofler og spinat."
+    ]
+  },
+  {
+    "id": "shakshuka-hytteost",
+    "name": "Shakshuka med feta og hytteost",
+    "description": "Vegetarisk æggeret i krydret tomatsauce, toppet med feta og hytteost.",
+    "servings": 4,
+    "timeMinutes": 25,
+    "proteinPerServing": 32,
+    "tags": [
+      "vegetar",
+      "æg",
+      "hurtig"
+    ],
+    "ingredients": [
+      {
+        "name": "Æg",
+        "amount": 10,
+        "unit": "stk",
+        "refPrice": 2.8,
+        "match": [
+          "æg"
+        ],
+        "exclude": [
+          "påskeæg",
+          "chokolade",
+          "nudler",
+          "pasta",
+          "kinderæg",
+          "mayonnaise",
+          "salat"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Hakkede tomater",
+        "amount": 800,
+        "unit": "g",
+        "refPrice": 20,
+        "match": [
+          "hakkede tomater",
+          "flåede tomater"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Hytteost",
+        "amount": 500,
+        "unit": "g",
+        "refPrice": 50,
+        "match": [
+          "hytteost"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Feta",
+        "amount": 200,
+        "unit": "g",
+        "refPrice": 90,
+        "match": [
+          "feta",
+          "salatost"
+        ],
+        "exclude": [
+          "olie",
+          "oliven"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Peberfrugt",
+        "amount": 2,
+        "unit": "stk",
+        "refPrice": 8,
+        "match": [
+          "peberfrugt",
+          "peberfrugter"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Løg",
+        "amount": 150,
+        "unit": "g",
+        "refPrice": 15,
+        "match": [
+          "løg"
+        ],
+        "exclude": [
+          "forårsløg",
+          "rødløg",
+          "ristede",
+          "syltede",
+          "løgringe"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Spidskommen, paprika, olie",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 0,
+        "match": [],
+        "exclude": [],
+        "pantry": true
+      }
+    ],
+    "steps": [
+      "Svits løg og peberfrugt i en stor pande med krydderierne.",
+      "Tilsæt tomaterne og lad saucen simre i 10 minutter.",
+      "Lav små fordybninger og slå æggene ud i saucen. Læg låg på i 6-8 minutter.",
+      "Drys med smuldret feta og klatter af hytteost.",
+      "Server med groft brød."
+    ]
+  },
+  {
+    "id": "pastasalat-tun",
+    "name": "Proteinrig pastasalat med tun og æg",
+    "description": "Kold pastasalat med tun, hårdkogte æg, ærter og en dressing af skyr og sennep. God til madpakken.",
+    "servings": 4,
+    "timeMinutes": 20,
+    "proteinPerServing": 41,
+    "tags": [
+      "fisk",
+      "madpakke",
+      "kold"
+    ],
+    "ingredients": [
+      {
+        "name": "Tun i vand",
+        "amount": 480,
+        "unit": "g",
+        "refPrice": 100,
+        "match": [
+          "tun i vand",
+          "tun i olie",
+          "tunfisk",
+          "tun"
+        ],
+        "exclude": [
+          "tunmousse",
+          "salat",
+          "pålæg"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Pasta",
+        "amount": 300,
+        "unit": "g",
+        "refPrice": 20,
+        "match": [
+          "pasta",
+          "fusilli",
+          "penne",
+          "skruer"
+        ],
+        "exclude": [
+          "frisk pasta",
+          "pastasauce",
+          "pastaret",
+          "lasagne"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Æg",
+        "amount": 4,
+        "unit": "stk",
+        "refPrice": 2.8,
+        "match": [
+          "æg"
+        ],
+        "exclude": [
+          "påskeæg",
+          "chokolade",
+          "nudler",
+          "pasta",
+          "kinderæg",
+          "mayonnaise",
+          "salat"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Ærter, frost",
+        "amount": 300,
+        "unit": "g",
+        "refPrice": 30,
+        "match": [
+          "ærter"
+        ],
+        "exclude": [
+          "sukkerærter",
+          "kikærter"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Skyr",
+        "amount": 300,
+        "unit": "g",
+        "refPrice": 30,
+        "match": [
+          "skyr"
+        ],
+        "exclude": [
+          "drikke",
+          "shot"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Sennep, citron, salt, peber",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 0,
+        "match": [],
+        "exclude": [],
+        "pantry": true
+      }
+    ],
+    "steps": [
+      "Kog pastaen, skyl den kold og lad den dryppe af.",
+      "Kog æggene i 9 minutter, køl dem af og skær dem i både.",
+      "Rør skyr med sennep, citron, salt og peber.",
+      "Vend pasta, tun, ærter og dressing sammen, og top med æg."
+    ]
+  },
+  {
+    "id": "kalkun-wok",
+    "name": "Kalkun-wok med nudler",
+    "description": "Hurtig wok med strimler af kalkunbryst, grøntsager og ægnudler i soja-ingefærsauce.",
+    "servings": 4,
+    "timeMinutes": 20,
+    "proteinPerServing": 45,
+    "tags": [
+      "kalkun",
+      "wok",
+      "hurtig"
+    ],
+    "ingredients": [
+      {
+        "name": "Kalkunbryst",
+        "amount": 700,
+        "unit": "g",
+        "refPrice": 140,
+        "match": [
+          "kalkunbryst",
+          "kalkunfilet",
+          "kalkunstrimler",
+          "kalkun"
+        ],
+        "exclude": [
+          "pålæg",
+          "hakket",
+          "bacon"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Ægnudler",
+        "amount": 250,
+        "unit": "g",
+        "refPrice": 40,
+        "match": [
+          "ægnudler",
+          "nudler",
+          "wokn"
+        ],
+        "exclude": [
+          "instant",
+          "suppe",
+          "cup"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Wokgrøntsager, frost",
+        "amount": 750,
+        "unit": "g",
+        "refPrice": 30,
+        "match": [
+          "wokgrøntsager",
+          "wok grønt",
+          "wokblanding",
+          "wok mix"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Soja, ingefær, hvidløg, olie",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 0,
+        "match": [],
+        "exclude": [],
+        "pantry": true
+      }
+    ],
+    "steps": [
+      "Kog nudlerne og lad dem dryppe af.",
+      "Skær kalkunen i strimler og steg dem ved høj varme i en wok.",
+      "Tilsæt grøntsagerne og steg 4-5 minutter.",
+      "Vend nudler, soja, ingefær og hvidløg i, og server med det samme."
+    ]
+  },
+  {
+    "id": "mørbrad-champignon",
+    "name": "Svinemørbrad i fad med champignon",
+    "description": "Mørbradbøffer i ovn med champignon og let flødesauce, serveret med ris eller kartofler.",
+    "servings": 4,
+    "timeMinutes": 40,
+    "proteinPerServing": 44,
+    "tags": [
+      "svinekød",
+      "ovn",
+      "weekend"
+    ],
+    "ingredients": [
+      {
+        "name": "Svinemørbrad",
+        "amount": 700,
+        "unit": "g",
+        "refPrice": 120,
+        "match": [
+          "svinemørbrad",
+          "mørbrad"
+        ],
+        "exclude": [
+          "bøf af oksemørbrad",
+          "oksemørbrad",
+          "kalv"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Champignon",
+        "amount": 400,
+        "unit": "g",
+        "refPrice": 50,
+        "match": [
+          "champignon",
+          "champignoner",
+          "svampe"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Madlavningsfløde 9%",
+        "amount": 250,
+        "unit": "ml",
+        "refPrice": 40,
+        "match": [
+          "madlavningsfløde",
+          "fløde"
+        ],
+        "exclude": [
+          "piskefløde",
+          "flødeboller",
+          "is"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Ris",
+        "amount": 300,
+        "unit": "g",
+        "refPrice": 25,
+        "match": [
+          "jasminris",
+          "basmatiris",
+          "ris"
+        ],
+        "exclude": [
+          "risengrød",
+          "grødris",
+          "riskiks",
+          "risotto",
+          "rispapir",
+          "risalamande",
+          "nudler"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Bouillon, paprika, salt, peber",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 0,
+        "match": [],
+        "exclude": [],
+        "pantry": true
+      }
+    ],
+    "steps": [
+      "Forvarm ovnen til 200 °C.",
+      "Skær mørbraden i medaljoner og brun dem hurtigt på panden.",
+      "Læg kødet i et fad med skårne champignoner.",
+      "Hæld fløde rørt med bouillon og paprika over, og bag i 20 minutter.",
+      "Server med ris."
+    ]
+  },
+  {
+    "id": "lasagne-hytteost",
+    "name": "Lasagne med magert oksekød og hytteost",
+    "description": "Lettere lasagne, hvor bechamelsaucen er erstattet af hytteost og æg – masser af protein.",
+    "servings": 6,
+    "timeMinutes": 75,
+    "proteinPerServing": 46,
+    "tags": [
+      "oksekød",
+      "ovn",
+      "fryser"
+    ],
+    "ingredients": [
+      {
+        "name": "Hakket oksekød 4-7%",
+        "amount": 800,
+        "unit": "g",
+        "refPrice": 125,
+        "match": [
+          "hakket oksekød",
+          "hakket okse",
+          "oksefars"
+        ],
+        "exclude": [
+          "bøf",
+          "burger",
+          "færdigret"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Lasagneplader",
+        "amount": 250,
+        "unit": "g",
+        "refPrice": 30,
+        "match": [
+          "lasagneplader",
+          "lasagne plader",
+          "lasagne"
+        ],
+        "exclude": [
+          "færdigret",
+          "frost lasagne"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Hytteost",
+        "amount": 500,
+        "unit": "g",
+        "refPrice": 50,
+        "match": [
+          "hytteost"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Hakkede tomater",
+        "amount": 800,
+        "unit": "g",
+        "refPrice": 20,
+        "match": [
+          "hakkede tomater",
+          "flåede tomater"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Revet ost",
+        "amount": 150,
+        "unit": "g",
+        "refPrice": 90,
+        "match": [
+          "revet ost",
+          "mozzarella",
+          "pizzatopping"
+        ],
+        "exclude": [
+          "frisk mozzarella"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Æg",
+        "amount": 2,
+        "unit": "stk",
+        "refPrice": 2.8,
+        "match": [
+          "æg"
+        ],
+        "exclude": [
+          "påskeæg",
+          "chokolade",
+          "nudler",
+          "pasta",
+          "kinderæg",
+          "mayonnaise",
+          "salat"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Løg",
+        "amount": 150,
+        "unit": "g",
+        "refPrice": 15,
+        "match": [
+          "løg"
+        ],
+        "exclude": [
+          "forårsløg",
+          "rødløg",
+          "ristede",
+          "syltede",
+          "løgringe"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Oregano, hvidløg, salt, peber",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 0,
+        "match": [],
+        "exclude": [],
+        "pantry": true
+      }
+    ],
+    "steps": [
+      "Brun kødet med løg og hvidløg, tilsæt tomater og krydderier, og lad saucen simre i 15 minutter.",
+      "Rør hytteost sammen med æggene.",
+      "Lag kødsauce, lasagneplader og hytteostblanding i et fad – slut med kødsauce.",
+      "Drys med revet ost og bag ved 200 °C i 35-40 minutter."
+    ]
+  },
+  {
+    "id": "torsk-linser",
+    "name": "Torsk på bund af linser",
+    "description": "Mild ovnbagt torsk på en bund af grønne linser, gulerod og tomat.",
+    "servings": 4,
+    "timeMinutes": 40,
+    "proteinPerServing": 43,
+    "tags": [
+      "fisk",
+      "ovn",
+      "fiberrig"
+    ],
+    "ingredients": [
+      {
+        "name": "Torskefilet",
+        "amount": 600,
+        "unit": "g",
+        "refPrice": 200,
+        "match": [
+          "torskefilet",
+          "torsk"
+        ],
+        "exclude": [
+          "røget",
+          "rogn",
+          "paneret",
+          "fiskefrikadeller"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Grønne linser",
+        "amount": 250,
+        "unit": "g",
+        "refPrice": 30,
+        "match": [
+          "linser"
+        ],
+        "exclude": [
+          "linsechips",
+          "linsepasta"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Gulerødder",
+        "amount": 400,
+        "unit": "g",
+        "refPrice": 12,
+        "match": [
+          "gulerødder",
+          "gulerod"
+        ],
+        "exclude": [],
+        "pantry": false
+      },
+      {
+        "name": "Cherrytomater",
+        "amount": 250,
+        "unit": "g",
+        "refPrice": 50,
+        "match": [
+          "cherrytomater",
+          "snacktomater",
+          "tomater"
+        ],
+        "exclude": [
+          "hakkede",
+          "flåede",
+          "soltørrede",
+          "ketchup",
+          "purée"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Citron",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 5,
+        "match": [
+          "citron",
+          "citroner"
+        ],
+        "exclude": [
+          "saft",
+          "te"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Olie, hvidløg, timian, bouillon",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 0,
+        "match": [],
+        "exclude": [],
+        "pantry": true
+      }
+    ],
+    "steps": [
+      "Kog linserne i bouillon i ca. 20 minutter.",
+      "Vend linserne med revet gulerod, halverede tomater, olie og citron, og fordel dem i et fad.",
+      "Læg torsken ovenpå, krydr med salt, peber og timian.",
+      "Bag ved 200 °C i 15 minutter."
+    ]
+  },
+  {
+    "id": "frikadeller-kartoffelsalat",
+    "name": "Frikadeller med kartoffelsalat på skyr",
+    "description": "Danske frikadeller med en let kartoffelsalat, hvor mayonnaise er skiftet ud med skyr.",
+    "servings": 4,
+    "timeMinutes": 50,
+    "proteinPerServing": 38,
+    "tags": [
+      "svinekød",
+      "dansk",
+      "klassiker"
+    ],
+    "ingredients": [
+      {
+        "name": "Hakket svine- og kalvekød",
+        "amount": 600,
+        "unit": "g",
+        "refPrice": 75,
+        "match": [
+          "svine- og kalvekød",
+          "grise- og kalvekød",
+          "svine/kalv",
+          "hakket svin og kalv"
+        ],
+        "exclude": [
+          "frikadeller færdige",
+          "færdigret"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Æg",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 2.8,
+        "match": [
+          "æg"
+        ],
+        "exclude": [
+          "påskeæg",
+          "chokolade",
+          "nudler",
+          "pasta",
+          "kinderæg",
+          "mayonnaise",
+          "salat"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Kartofler",
+        "amount": 1000,
+        "unit": "g",
+        "refPrice": 18,
+        "match": [
+          "kartofler"
+        ],
+        "exclude": [
+          "søde",
+          "chips",
+          "fritter",
+          "pommes",
+          "mos",
+          "både"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Skyr",
+        "amount": 300,
+        "unit": "g",
+        "refPrice": 30,
+        "match": [
+          "skyr"
+        ],
+        "exclude": [
+          "drikke",
+          "shot"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Løg",
+        "amount": 150,
+        "unit": "g",
+        "refPrice": 15,
+        "match": [
+          "løg"
+        ],
+        "exclude": [
+          "forårsløg",
+          "rødløg",
+          "ristede",
+          "syltede",
+          "løgringe"
+        ],
+        "pantry": false
+      },
+      {
+        "name": "Havregryn, mælk, sennep, purløg, salt, peber",
+        "amount": 1,
+        "unit": "stk",
+        "refPrice": 0,
+        "match": [],
+        "exclude": [],
+        "pantry": true
+      }
+    ],
+    "steps": [
+      "Rør farsen med æg, revet løg, havregryn, lidt mælk, salt og peber.",
+      "Form frikadellerne og steg dem ca. 6 minutter på hver side.",
+      "Kog kartoflerne, lad dem køle af og skær dem i skiver.",
+      "Rør skyr med sennep og purløg, og vend kartoflerne i."
+    ]
+  }
+]
