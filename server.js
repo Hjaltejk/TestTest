@@ -4,6 +4,7 @@ import { extname, join, normalize, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRecipeStore } from './src/recipes.js';
 import { createOfferService } from './src/offers.js';
+import { importRecipeFromUrl } from './src/importer.js';
 import { rankRecipes, DEFAULT_ORGANIC_LEVEL } from './src/matcher.js';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -65,6 +66,12 @@ async function handleApi(req, res, url) {
     if (req.method === 'DELETE' && id) {
       return (await recipes.remove(id)) ? send(res, 204, {}) : send(res, 404, { error: 'Opskriften findes ikke.' });
     }
+  }
+
+  // Henter en opskrift fra et link og returnerer et udkast (gemmes ikke).
+  if (resource === 'import' && req.method === 'POST') {
+    const { url: link } = await readJson(req);
+    return send(res, 200, await importRecipeFromUrl(link));
   }
 
   if (resource === 'offers' && req.method === 'GET') {

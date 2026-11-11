@@ -21,6 +21,7 @@ Appen starter med 10 proteinrige testopskrifter i `data/recipes.json`.
    - **søgeord**, som skal stå i tilbudsavisen, fx `kyllingebryst, kyllingefilet`
    - **udelad**: ord, der gør at et tilbud *ikke* passer, fx `røget, pålæg`
    - **har altid**: krydderier, olie o.l., som ikke tælles med i prisen
+   **Importér fra link:** Under "Mine opskrifter" kan du indsætte et link til en opskrift. Appen henter siden, læser opskriften og åbner den i formularen, så du kan rette den til, før du gemmer. Ingredienslinjer som "1 dåse hakkede tomater (400 g)" og "2 spsk olivenolie" omsættes automatisk. Normalpris, søgeord og protein gættes ud fra en indbygget liste over almindelige ingredienser (`src/ingredients.js`). Krydderier, olie o.l. markeres som "Har altid". Ukendte ingredienser får normalpris 0, som du selv skal udfylde. Importen virker med sider, der har struktureret opskriftsdata (schema.org/Recipe), hvilket de fleste store opskriftssider og madblogs har.
 2. **Tilbud.** Serveren samler alle søgeord fra dine opskrifter og søger efter dem i tilbudsaviserne via [Tjek](https://tjek.com) (tidligere eTilbudsavis). Tjek dækker bl.a. Netto, Føtex, Bilka, REMA 1000, Lidl, Coop 365, Kvickly, SuperBrugsen og Meny. Tilbuddene caches i 6 timer.
 3. **Matching.** Til hver ingrediens finder appen det billigste aktuelle tilbud *pr. kg/liter/stk*. Et tilbud tæller kun, hvis det er billigere end din normalpris.
 4. **Rangering.** Hver opskrift får en score fra 0 til 100:
@@ -58,6 +59,7 @@ Hvis appen ikke kan nå Tjek (fx uden internet), bruger den demo-tilbud fra `dat
 | `RADIUS` | `20000` | Søgeradius i meter |
 | `TJEK_API_KEY` | – | API-nøgle til Tjek, hvis deres API kræver det |
 | `OFFER_CACHE_HOURS` | `6` | Hvor længe tilbud caches |
+| `IMPORT_ALLOW_PRIVATE` | – | Sæt til `1` for at kunne importere fra lokale adresser (kun til udvikling) |
 
 Eksempel for Aarhus:
 
@@ -75,6 +77,8 @@ src/offers.js             Henter og cacher tilbud
 src/providers/tjek.js     Tilbud fra Tjek/eTilbudsavis
 src/providers/sample.js   Demo-tilbud
 src/recipes.js            Opskrifter (validering og lagring i JSON)
+src/importer.js           Import af opskrifter fra links (schema.org/Recipe)
+src/ingredients.js        Fortolkning af ingredienslinjer + vejledende priser og protein
 public/                   Brugerflade
 data/recipes.json         Dine opskrifter
 data/sample-offers.json   Demo-tilbud

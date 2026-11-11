@@ -157,11 +157,21 @@ function renderRanking(list) {
           <ul class="lines">${lines}</ul>
           ${pantry ? `<p class="muted small">Har du i forvejen: ${pantry}</p>` : ''}
           ${r.recipe.description ? `<p>${esc(r.recipe.description)}</p>` : ''}
+          ${sourceLink(r.recipe)}
           <ol class="steps">${(r.recipe.steps ?? []).map((s) => `<li>${esc(s)}</li>`).join('')}</ol>
         </details>
       </li>`;
     })
     .join('');
+}
+
+function sourceLink(recipe) {
+  if (!recipe.sourceUrl) return '';
+  let host = recipe.sourceUrl;
+  try {
+    host = new URL(recipe.sourceUrl).hostname.replace(/^www\./, '');
+  } catch {}
+  return `<p class="small">Original opskrift: <a href="${esc(recipe.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(host)}</a></p>`;
 }
 
 /* ---------- Tilbud ---------- */
@@ -296,11 +306,23 @@ function addIngredientRow(ing = {}) {
   $('#ingredient-rows').append(row);
 }
 
-function openForm(recipe) {
+function openForm(recipe, { warnings = [], imported = false } = {}) {
   editingId = recipe?.id ?? null;
   form.reset();
-  $('#form-title').textContent = recipe ? 'Redigér opskrift' : 'Ny opskrift';
+  $('#form-title').textContent = imported ? 'Importeret opskrift – tjek og gem' : recipe ? 'Redigér opskrift' : 'Ny opskrift';
   $('#form-error').hidden = true;
+  form.elements.sourceUrl.value = recipe?.sourceUrl ?? '';
+  const notice = $('#form-notice');
+  const source = recipe?.sourceUrl
+    ? `<p>Kilde: <a href="${esc(recipe.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(new URL(recipe.sourceUrl).hostname)}</a></p>`
+    : '';
+  const tips = imported
+    ? `<p><b>Gennemgå opskriften, før du gemmer.</b> Normalpriser og søgeord er gættet ud fra en indbygget liste.</p>${
+        warnings.length ? `<ul>${warnings.map((w) => `<li>${esc(w)}</li>`).join('')}</ul>` : ''
+      }`
+    : '';
+  notice.innerHTML = tips + source;
+  notice.hidden = !(tips || source);
   $('#ingredient-rows').innerHTML = '';
   if (recipe) {
     for (const f of ['name', 'description', 'servings', 'timeMinutes', 'proteinPerServing']) form.elements[f].value = recipe[f] ?? '';
@@ -345,11 +367,35 @@ function readForm() {
     proteinPerServing: f.proteinPerServing.value,
     tags: f.tags.value,
     steps: f.steps.value.split('\n'),
+    sourceUrl: f.sourceUrl.value,
     ingredients,
   };
 }
 
 $('#new-recipe').addEventListener('click', () => openForm());
+
+$('#import-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = $('#import-btn');
+  const err = $('#import-error');
+  err.hidden = true;
+  btn.disabled = true;
+  btn.textContent = 'Henter …';
+  try {
+    const { recipe, warnings } = await api('/api/import', {
+      method: 'POST',
+      body: JSON.stringify({ url: $('#import-url').value }),
+    });
+    openForm(recipe, { warnings, imported: true });
+    $('#import-url').value = '';
+  } catch (ex) {
+    err.textContent = ex.message;
+    err.hidden = false;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Hent opskrift';
+  }
+});
 $('#add-ingredient').addEventListener('click', () => addIngredientRow());
 $('#cancel').addEventListener('click', () => dialog.close());
 form.addEventListener('submit', async (e) => {

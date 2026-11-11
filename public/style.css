@@ -133,6 +133,18 @@ table.offers { width: 100%; border-collapse: collapse; background: var(--surface
 .offers th, .offers td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .offers .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
+/* Import fra link */
+.import { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }
+.import > label { color: var(--text); font-weight: 600; }
+.import-row { display: flex; gap: 8px; margin-top: 6px; }
+.import-row input { flex: 1; min-width: 0; }
+.import-row button { white-space: nowrap; }
+.import .hint { margin: 6px 0 0; }
+.notice { background: var(--warn-bg); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; font-size: .9rem; }
+.notice p { margin: 4px 0; }
+.notice ul { margin: 4px 0; padding-left: 1.2em; }
+.notice a, .card a { color: var(--accent); }
+
 /* Økologi */
 .eco { display: inline-block; background: var(--eco); color: var(--eco-ink); border-radius: 4px; padding: 0 5px; margin-right: 6px; font-size: .72rem; font-weight: 700; line-height: 1.5; vertical-align: 1px; }
 .organic-line { margin: 4px 0; font-size: .9rem; }
